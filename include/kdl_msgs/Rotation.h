@@ -9,6 +9,7 @@
 #include <kdl/frames.hpp>
 
 #include <kdl_msgs/util/array.h>
+#include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
 {
@@ -32,11 +33,11 @@ struct Rotation_ : public ::KDL::Rotation
   Rotation_(const ::KDL::Vector& x, const ::KDL::Vector& y, const ::KDL::Vector& z)
     : ::KDL::Rotation(x, y, z)
   {}
-//  Rotation_(const const_array_type& array)
-//    : ::KDL::Rotation(array[0], array[1], array[2],
-//                      array[3], array[4], array[5],
-//                      array[6], array[7], array[8])
-//  {}
+  Rotation_(const value_type (&array)[9])
+    : ::KDL::Rotation(array[0], array[1], array[2],
+                      array[3], array[4], array[5],
+                      array[6], array[7], array[8])
+  {}
   Rotation_(const ::KDL::Rotation& other)
     : ::KDL::Rotation(other)
   {}

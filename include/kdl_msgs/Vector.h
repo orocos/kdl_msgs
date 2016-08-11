@@ -9,6 +9,7 @@
 #include <kdl/frames.hpp>
 
 #include <kdl_msgs/util/array.h>
+#include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
 {
@@ -27,9 +28,9 @@ struct Vector_ : public ::KDL::Vector
   Vector_(double x, double y, double z)
     : ::KDL::Vector(x, y, z)
   {}
-//  Vector_(const const_array_type& array)
-//    : ::KDL::Vector(array[0], array[1], array[2])
-//  {}
+  Vector_(const value_type (&array)[3])
+    : ::KDL::Vector(array[0], array[1], array[2])
+  {}
   Vector_(const ::KDL::Vector& other)
     : ::KDL::Vector(other)
   {}
