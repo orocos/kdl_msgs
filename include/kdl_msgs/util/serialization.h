@@ -30,7 +30,6 @@
 #define KDL_MSGS_UTIL_SERIALIZATION_H
 
 #include <ros/serialization.h>
-#include "array.h"
 
 namespace ros {
 namespace serialization {
@@ -179,33 +178,6 @@ inline void deserialize(Stream& stream, T(&t)[N])
  */
 template<typename T, size_t N>
 inline uint32_t serializationLength(const T(&t)[N])
-{
-  return CArraySerializer<T, N>::serializedLength(t);
-}
-
-/**
- * \brief serialize version for kdl_msgs::util::array
- */
-template<typename T, size_t N, typename Stream>
-inline void serialize(Stream& stream, const kdl_msgs::util::array<T, N>& t)
-{
-  CArraySerializer<T, N>::write(stream, t);
-}
-
-/**
- * \brief deserialize version for kdl_msgs::util::array
- */
-template<typename T, size_t N, typename Stream>
-inline void deserialize(Stream& stream, kdl_msgs::util::array<T, N>& t)
-{
-  CArraySerializer<T, N>::read(stream, t);
-}
-
-/**
- * \brief serializationLength version for kdl_msgs::util::array
- */
-template<typename T, size_t N>
-inline uint32_t serializationLength(const kdl_msgs::util::array<T, N>& t)
 {
   return CArraySerializer<T, N>::serializedLength(t);
 }

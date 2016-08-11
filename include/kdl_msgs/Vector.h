@@ -8,7 +8,6 @@
 
 #include <kdl/frames.hpp>
 
-#include <kdl_msgs/util/array.h>
 #include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
@@ -18,8 +17,6 @@ struct Vector_ : public ::KDL::Vector
 {
   typedef Vector_<ContainerAllocator> Type;
   typedef double value_type;
-  typedef util::array<value_type, 3> array_type;
-  typedef util::array<const value_type, 3> const_array_type;
 
   Vector_()
   {}
@@ -46,9 +43,6 @@ struct Vector_ : public ::KDL::Vector
   typedef value_type _x_type;
   typedef value_type _y_type;
   typedef value_type _z_type;
-
-  array_type as_array() { return array_type(::KDL::Vector::data); }
-  const_array_type as_array() const { return const_array_type(::KDL::Vector::data); }
 
   typedef boost::shared_ptr< ::kdl_msgs::Vector_<ContainerAllocator> > Ptr;
   typedef boost::shared_ptr< ::kdl_msgs::Vector_<ContainerAllocator> const> ConstPtr;

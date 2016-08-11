@@ -8,7 +8,6 @@
 
 #include <kdl/frames.hpp>
 
-#include <kdl_msgs/util/array.h>
 #include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
@@ -18,8 +17,6 @@ struct Rotation_ : public ::KDL::Rotation
 {
   typedef Rotation_<ContainerAllocator> Type;
   typedef double value_type;
-  typedef util::array<value_type, 9> array_type;
-  typedef util::array<const value_type, 9> const_array_type;
 
   Rotation_()
   {}
@@ -50,9 +47,6 @@ struct Rotation_ : public ::KDL::Rotation
   }
 
   typedef value_type _data_type[9];
-
-  array_type as_array() { return array_type(::KDL::Rotation::data); }
-  const_array_type as_array() const { return const_array_type(::KDL::Rotation::data); }
 
   typedef boost::shared_ptr< ::kdl_msgs::Rotation_<ContainerAllocator> > Ptr;
   typedef boost::shared_ptr< ::kdl_msgs::Rotation_<ContainerAllocator> const> ConstPtr;
