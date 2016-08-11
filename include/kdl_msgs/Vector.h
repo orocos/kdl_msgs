@@ -198,15 +198,25 @@ namespace ros
 {
 namespace serialization
 {
-
   template<> struct Serializer< ::KDL::Vector >
   {
-    template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
+    template<typename Stream, typename T>
+    inline static void write(Stream& stream, const T& m)
     {
       stream.next(m.data);
     }
 
-    ROS_DECLARE_ALLINONE_SERIALIZER
+    template<typename Stream, typename T>
+    inline static void read(Stream& stream, T& m)
+    {
+      stream.next(m.data);
+    }
+
+    template<typename T>
+    inline static uint32_t serializedLength(const T& m)
+    {
+      return serializationLength(m.data);
+    }
   }; // struct Vector_
 
   template<class ContainerAllocator> struct Serializer< ::kdl_msgs::Vector_<ContainerAllocator> >

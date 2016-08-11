@@ -8,6 +8,7 @@
 #include <boost/assert.hpp>
 #include <boost/swap.hpp>
 
+#include <ros/serialization.h>
 
 namespace kdl_msgs {
 namespace util {
@@ -220,7 +221,199 @@ bool operator>= (const T x[N], const array<T,N>& y) {
     return !(x<y);
 }
 
+// get_array
+template<class T, std::size_t N>
+array<T,N> get_array(T (&x)[N]) {
+  return x;
+}
+template<class T, std::size_t N>
+array<const T,N> get_array(const T(&x)[N]) {
+  return x;
+}
+
 } // namespace util
 } // namespace kdl_msgs
+
+
+namespace ros {
+namespace serialization {
+
+/**
+* \brief C-Array serializer, default implementation does nothing
+*/
+template<typename T, size_t N, class Enabled = void>
+struct CArraySerializer
+{};
+
+/**
+* \brief C-Array serializer, specialized for non-fixed-size, non-simple types
+*/
+template<typename T, size_t N>
+struct CArraySerializer<T, N, typename boost::disable_if<mt::IsFixedSize<T> >::type>
+{
+ typedef T* IteratorType;
+ typedef const T* ConstIteratorType;
+
+ template<typename Stream, typename ArrayType>
+ inline static void write(Stream& stream, const ArrayType& v)
+ {
+   ConstIteratorType it = v;
+   ConstIteratorType end = v+N;
+   for (; it != end; ++it)
+   {
+     stream.next(*it);
+   }
+ }
+
+ template<typename Stream, typename ArrayType>
+ inline static void read(Stream& stream, ArrayType& v)
+ {
+   IteratorType it = v;
+   IteratorType end = v+N;
+   for (; it != end; ++it)
+   {
+     stream.next(*it);
+   }
+ }
+
+ template<typename ArrayType>
+ inline static uint32_t serializedLength(const ArrayType& v)
+ {
+   uint32_t size = 0;
+   ConstIteratorType it = v;
+   ConstIteratorType end = v+N;
+   for (; it != end; ++it)
+   {
+     size += serializationLength(*it);
+   }
+
+   return size;
+ }
+};
+
+/**
+* \brief C-Array serializer, specialized for fixed-size, simple types
+*/
+template<typename T, size_t N>
+struct CArraySerializer<T, N, typename boost::enable_if<mt::IsSimple<T> >::type>
+{
+ typedef T* IteratorType;
+ typedef const T* ConstIteratorType;
+
+ template<typename Stream, typename ArrayType>
+ inline static void write(Stream& stream, const ArrayType& v)
+ {
+   const uint32_t data_len = N * sizeof(T);
+   memcpy(stream.advance(data_len), &v, data_len);
+ }
+
+ template<typename Stream, typename ArrayType>
+ inline static void read(Stream& stream, ArrayType& v)
+ {
+   const uint32_t data_len = N * sizeof(T);
+   memcpy(&v, stream.advance(data_len), data_len);
+ }
+
+ template<typename ArrayType>
+ inline static uint32_t serializedLength(const ArrayType&)
+ {
+   return N * sizeof(T);
+ }
+};
+
+/**
+* \brief C-Array serializer, specialized for fixed-size, non-simple types
+*/
+template<typename T, size_t N>
+struct CArraySerializer<T, N, typename boost::enable_if<mpl::and_<mt::IsFixedSize<T>, mpl::not_<mt::IsSimple<T> > > >::type>
+{
+ typedef T* IteratorType;
+ typedef const T* ConstIteratorType;
+
+ template<typename Stream, typename ArrayType>
+ inline static void write(Stream& stream, const ArrayType& v)
+ {
+   ConstIteratorType it = v;
+   ConstIteratorType end = v+N;
+   for (; it != end; ++it)
+   {
+     stream.next(*it);
+   }
+ }
+
+ template<typename Stream, typename ArrayType>
+ inline static void read(Stream& stream, ArrayType& v)
+ {
+   IteratorType it = v;
+   IteratorType end = v+N;
+   for (; it != end; ++it)
+   {
+     stream.next(*it);
+   }
+ }
+
+ template<typename ArrayType>
+ inline static uint32_t serializedLength(const ArrayType& v)
+ {
+   return serializationLength(*v) * N;
+ }
+};
+
+/**
+ * \brief serialize version for plain C arrays
+ */
+template<typename T, size_t N, typename Stream>
+inline void serialize(Stream& stream, const T(&t)[N])
+{
+  CArraySerializer<T, N>::write(stream, t);
+}
+
+/**
+ * \brief deserialize version for plain C arrays
+ */
+template<typename T, size_t N, typename Stream>
+inline void deserialize(Stream& stream, T(&t)[N])
+{
+  CArraySerializer<T, N>::read(stream, t);
+}
+
+/**
+ * \brief serializationLength version for plain C arrays
+ */
+template<typename T, size_t N>
+inline uint32_t serializationLength(const T(&t)[N])
+{
+  return CArraySerializer<T, N>::serializedLength(t);
+}
+
+/**
+ * \brief serialize version for kdl_msgs::util::array
+ */
+template<typename T, size_t N, typename Stream>
+inline void serialize(Stream& stream, const kdl_msgs::util::array<T, N>& t)
+{
+  CArraySerializer<T, N>::write(stream, t);
+}
+
+/**
+ * \brief deserialize version for kdl_msgs::util::array
+ */
+template<typename T, size_t N, typename Stream>
+inline void deserialize(Stream& stream, kdl_msgs::util::array<T, N>& t)
+{
+  CArraySerializer<T, N>::read(stream, t);
+}
+
+/**
+ * \brief serializationLength version for kdl_msgs::util::array
+ */
+template<typename T, size_t N>
+inline uint32_t serializationLength(const kdl_msgs::util::array<T, N>& t)
+{
+  return CArraySerializer<T, N>::serializedLength(t);
+}
+
+} // namespace serialization
+} // namespace ros
 
 #endif // KDL_MSGS__ARRAY_H
