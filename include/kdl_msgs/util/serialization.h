@@ -30,6 +30,7 @@
 #define KDL_MSGS_UTIL_SERIALIZATION_H
 
 #include <ros/serialization.h>
+#include "array.h"
 
 namespace ros {
 namespace serialization {
