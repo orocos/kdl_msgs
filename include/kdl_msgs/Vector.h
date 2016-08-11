@@ -25,7 +25,7 @@ struct Vector_ : public ::KDL::Vector
   {}
   Vector_(const ContainerAllocator&)
   {}
-  Vector_(double x, double y, double z)
+  Vector_(value_type x, value_type y, value_type z)
     : ::KDL::Vector(x, y, z)
   {}
   Vector_(const value_type (&array)[3])
