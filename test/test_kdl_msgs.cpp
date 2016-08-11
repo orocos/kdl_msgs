@@ -13,7 +13,8 @@
   { \
     kdl_msgs::_type c1; \
     kdl_msgs::_type c2(_base_class()); \
-    c1 = _base_class(); \
+    c1 = sample; \
+    EXPECT_EQ(sample, c1); \
   } \
   \
   EXPECT_FALSE(ros::message_traits::IsSimple<kdl_msgs::_type>::value); \
@@ -50,6 +51,14 @@ TEST(TestKdlMsgs, Vector)
 
   // non-default constructors
   kdl_msgs::Vector c2(0.0, 1.0, 2.0);
+
+  // operators
+  kdl_msgs::Vector sum = msg + sample;
+  kdl_msgs::Vector diff = msg - sample;
+  kdl_msgs::Vector mul1 = msg * 2.0;
+  kdl_msgs::Vector mul2 = 2.0 * msg;
+  kdl_msgs::Vector div1 = msg / 2.0;
+  kdl_msgs::Vector cross = msg * msg;
 }
 
 TEST(TestKdlMsgs, Rotation)
@@ -63,6 +72,8 @@ TEST(TestKdlMsgs, Rotation)
   // non-default constructors
   kdl_msgs::Rotation c2(0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0);
   kdl_msgs::Rotation c3(KDL::Vector(), KDL::Vector(), KDL::Vector());
+
+  // operators
 }
 
 TEST(TestKdlMsgs, Frame)
@@ -79,6 +90,8 @@ TEST(TestKdlMsgs, Frame)
   kdl_msgs::Frame c2(KDL::Rotation(), KDL::Vector());
   kdl_msgs::Frame c3(KDL::Rotation());
   kdl_msgs::Frame c4(KDL::Vector());
+
+  // operators
 }
 
 // Run all the tests that were declared with TEST()
