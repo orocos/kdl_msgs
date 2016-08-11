@@ -1,0 +1,7 @@
+foreach(_header @HEADERS@)
+  get_filename_component(_msg "${_header}" NAME_WE)
+  if(EXISTS "@CATKIN_DEVEL_PREFIX@/include/@PROJECT_NAME@/${_msg}.h")
+    file(MAKE_DIRECTORY "@CATKIN_DEVEL_PREFIX@/include/@PROJECT_NAME@/generated")
+    file(RENAME "@CATKIN_DEVEL_PREFIX@/include/@PROJECT_NAME@/${_msg}.h" "@CATKIN_DEVEL_PREFIX@/include/@PROJECT_NAME@/generated/${_msg}.h")
+  endif()
+endforeach()
