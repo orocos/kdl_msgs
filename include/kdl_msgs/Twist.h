@@ -18,14 +18,18 @@ struct Twist_ : public ::KDL::Twist
   typedef Twist_<ContainerAllocator> Type;
 
   Twist_()
+    : linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
   {}
   Twist_(const ContainerAllocator&)
+    : linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
   {}
   Twist_(const ::KDL::Vector& vel, const ::KDL::Vector& rot)
     : ::KDL::Twist(vel, rot)
+    , linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
   {}
   Twist_(const ::KDL::Twist& other)
     : ::KDL::Twist(other)
+    , linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
   {}
 
   // assignment operator
@@ -35,8 +39,10 @@ struct Twist_ : public ::KDL::Twist
     return *this;
   }
 
-  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _vel_type;
-  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _rot_type;
+  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _linear_type;
+  ::KDL::Vector& linear; // reference to ::KDL::Twist::vel
+  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _angular_type;
+  ::KDL::Vector& angular; // reference to ::KDL::Twist::rot
 
   typedef boost::shared_ptr< ::kdl_msgs::Twist_<ContainerAllocator> > Ptr;
   typedef boost::shared_ptr< ::kdl_msgs::Twist_<ContainerAllocator> const> ConstPtr;
@@ -99,12 +105,12 @@ struct MD5Sum< ::KDL::Twist >
 {
   static const char* value()
   {
-    return "4d302cb37b4f52dc76206a9011961870";
+    return "9f195f881246fdfa2798d1d3eebca84a";
   }
 
   static const char* value(const ::KDL::Twist&) { return value(); }
-  static const uint64_t static_value1 = 0x4d302cb37b4f52dcULL;
-  static const uint64_t static_value2 = 0x76206a9011961870ULL;
+  static const uint64_t static_value1 = 0x9f195f881246fdfaULL;
+  static const uint64_t static_value2 = 0x2798d1d3eebca84aULL;
 };
 
 template<>
@@ -126,8 +132,8 @@ struct Definition< ::KDL::Twist >
     return "# Represents a KDL::Twist instance.\n\
 # This message is compatible to geometry_msgs/Twist.\n\
 \n\
-Vector vel\n\
-Vector rot\n\
+Vector linear\n\
+Vector angular\n\
 \n\
 ================================================================================\n\
 MSG: kdl_msgs/Vector\n\
@@ -175,10 +181,10 @@ struct Printer< ::KDL::Twist >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::KDL::Twist& v)
   {
-    s << indent << "vel: ";
+    s << indent << "linear: ";
     s << std::endl;
     Printer< ::KDL::Vector >::stream(s, indent + "  ", v.vel);
-    s << indent << "rot: ";
+    s << indent << "angular: ";
     s << std::endl;
     Printer< ::KDL::Vector >::stream(s, indent + "  ", v.rot);
   }

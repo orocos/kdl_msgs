@@ -135,7 +135,7 @@ TEST(TestKdlMsgs, Twist)
   kdl_msgs::Twist msg(sample);
   EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(Twist, KDL::Twist, "4d302cb37b4f52dc76206a9011961870", true);
+  TEST_MESSAGE(Twist, KDL::Twist, "9f195f881246fdfa2798d1d3eebca84a", true);
 
   // non-default constructors
   kdl_msgs::Twist c2(KDL::Vector(), KDL::Vector());
