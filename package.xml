@@ -16,4 +16,7 @@
   <depend>orocos_kdl</depend>
   <depend>std_msgs</depend>
 
+  <test_depend>roscpp_serialization</test_depend>
+  <test_depend>roscpp_traits</test_depend>
+
 </package>

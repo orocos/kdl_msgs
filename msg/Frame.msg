@@ -1,4 +1,4 @@
-# Represents a KDL::Frame.
+# Represents a KDL::Frame instance.
 
 Vector p
 Rotation M

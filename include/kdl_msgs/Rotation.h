@@ -8,6 +8,7 @@
 
 #include <kdl/frames.hpp>
 
+#include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
@@ -83,16 +84,6 @@ struct IsFixedSize< ::KDL::Rotation const>
   : TrueType
   { };
 
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : IsFixedSize< ::KDL::Rotation >
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Rotation_<ContainerAllocator> const>
-  : IsFixedSize< ::KDL::Rotation const>
-  { };
-
 template <>
 struct IsMessage< ::KDL::Rotation >
   : TrueType
@@ -103,16 +94,6 @@ struct IsMessage< ::KDL::Rotation const>
   : TrueType
   { };
 
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : IsMessage< ::KDL::Rotation >
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Rotation_<ContainerAllocator> const>
-  : IsMessage< ::KDL::Rotation const>
-  { };
-
 template <>
 struct HasHeader< ::KDL::Rotation >
   : FalseType
@@ -121,16 +102,6 @@ struct HasHeader< ::KDL::Rotation >
 template <>
 struct HasHeader< ::KDL::Rotation const>
   : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : HasHeader< ::KDL::Rotation >
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Rotation_<ContainerAllocator> const>
-  : HasHeader< ::KDL::Rotation const>
   { };
 
 
@@ -147,11 +118,6 @@ struct MD5Sum< ::KDL::Rotation >
   static const uint64_t static_value2 = 0x7a30ea9fe5ade752ULL;
 };
 
-template<class ContainerAllocator>
-struct MD5Sum< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : MD5Sum< ::KDL::Rotation >
-{};
-
 template<>
 struct DataType< ::KDL::Rotation >
 {
@@ -163,17 +129,12 @@ struct DataType< ::KDL::Rotation >
   static const char* value(const ::KDL::Rotation&) { return value(); }
 };
 
-template<class ContainerAllocator>
-struct DataType< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : DataType< ::KDL::Rotation >
-{};
-
 template<>
 struct Definition< ::KDL::Rotation >
 {
   static const char* value()
   {
-    return "# Represents a KDL::Rotation.\n\
+    return "# Represents a KDL::Rotation instance.\n\
 \n\
 float64[9] data\n\
 ";
@@ -181,11 +142,6 @@ float64[9] data\n\
 
   static const char* value(const ::KDL::Rotation&) { return value(); }
 };
-
-template<class ContainerAllocator>
-struct Definition< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : Definition< ::KDL::Rotation >
-{};
 
 } // namespace message_traits
 } // namespace ros
@@ -216,10 +172,6 @@ namespace serialization
     }
   }; // struct Rotation_
 
-  template<class ContainerAllocator> struct Serializer< ::kdl_msgs::Rotation_<ContainerAllocator> >
-    : Serializer< ::KDL::Rotation >
-  {};
-
 } // namespace serialization
 } // namespace ros
 
@@ -242,12 +194,11 @@ struct Printer< ::KDL::Rotation >
   }
 };
 
-template<class ContainerAllocator>
-struct Printer< ::kdl_msgs::Rotation_<ContainerAllocator> >
-  : Printer< ::KDL::Rotation >
-{};
-
 } // namespace message_operations
 } // namespace ros
+
+FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
+FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
+FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
 
 #endif // KDL_MSGS_MESSAGE_ROTATION_H

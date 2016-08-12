@@ -8,6 +8,7 @@
 
 #include <kdl/frames.hpp>
 
+#include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
 namespace kdl_msgs
@@ -79,16 +80,6 @@ struct IsFixedSize< ::KDL::Vector const>
   : TrueType
   { };
 
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : IsFixedSize< ::KDL::Vector >
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Vector_<ContainerAllocator> const>
-  : IsFixedSize< ::KDL::Vector const>
-  { };
-
 template <>
 struct IsMessage< ::KDL::Vector >
   : TrueType
@@ -97,16 +88,6 @@ struct IsMessage< ::KDL::Vector >
 template <>
 struct IsMessage< ::KDL::Vector const>
   : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : IsMessage< ::KDL::Vector >
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Vector_<ContainerAllocator> const>
-  : IsMessage< ::KDL::Vector const>
   { };
 
 template <>
@@ -118,17 +99,6 @@ template <>
 struct HasHeader< ::KDL::Vector const>
   : FalseType
   { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : HasHeader< ::KDL::Vector >
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Vector_<ContainerAllocator> const>
-  : HasHeader< ::KDL::Vector const>
-  { };
-
 
 template<>
 struct MD5Sum< ::KDL::Vector >
@@ -143,11 +113,6 @@ struct MD5Sum< ::KDL::Vector >
   static const uint64_t static_value2 = 0xc2b10fb484ea7f17ULL;
 };
 
-template<class ContainerAllocator>
-struct MD5Sum< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : MD5Sum< ::KDL::Vector >
-{};
-
 template<>
 struct DataType< ::KDL::Vector >
 {
@@ -159,17 +124,12 @@ struct DataType< ::KDL::Vector >
   static const char* value(const ::KDL::Vector&) { return value(); }
 };
 
-template<class ContainerAllocator>
-struct DataType< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : DataType< ::KDL::Vector >
-{};
-
 template<>
 struct Definition< ::KDL::Vector >
 {
   static const char* value()
   {
-    return "# Represents a KDL::Vector.\n\
+    return "# Represents a KDL::Vector instance.\n\
 # This message is compatible to geometry_msgs/Vector3.\n\
 \n\
 float64 x\n\
@@ -180,11 +140,6 @@ float64 z\n\
 
   static const char* value(const ::KDL::Vector&) { return value(); }
 };
-
-template<class ContainerAllocator>
-struct Definition< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : Definition< ::KDL::Vector >
-{};
 
 } // namespace message_traits
 } // namespace ros
@@ -214,10 +169,6 @@ namespace serialization
     }
   }; // struct Vector_
 
-  template<class ContainerAllocator> struct Serializer< ::kdl_msgs::Vector_<ContainerAllocator> >
-    : Serializer< ::KDL::Vector >
-  {};
-
 } // namespace serialization
 } // namespace ros
 
@@ -240,12 +191,11 @@ struct Printer< ::KDL::Vector >
   }
 };
 
-template<class ContainerAllocator>
-struct Printer< ::kdl_msgs::Vector_<ContainerAllocator> >
-  : Printer< ::KDL::Vector >
-{};
-
 } // namespace message_operations
 } // namespace ros
+
+FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
+FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
+FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
 
 #endif // KDL_MSGS_MESSAGE_VECTOR_H

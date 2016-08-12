@@ -25,19 +25,17 @@ catkin_python_setup()
 add_message_files(
   FILES
   Chain.msg
-  ChainStamped.msg
   Frame.msg
   FrameStamped.msg
   Jacobian.msg
-  JacobianStamped.msg
   JntArray.msg
   JntArrayStamped.msg
   Joint.msg
-  JointStamped.msg
+  RigidBodyInertia.msg
   Rotation.msg
   RotationStamped.msg
+  RotationalInertia.msg
   Segment.msg
-  SegmentStamped.msg
   Twist.msg
   TwistStamped.msg
   Vector.msg
@@ -112,14 +110,20 @@ install(DIRECTORY include/${PROJECT_NAME}/
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${orocos_kdl_INCLUDE_DIRS}
 )
 
 ## Add gtest based cpp test target and link libraries
-catkin_add_gtest(${PROJECT_NAME}-test test/test_kdl_msgs.cpp)
-if(TARGET ${PROJECT_NAME}-test)
+if(CATKIN_ENABLE_TESTING)
+  find_package(roscpp_serialization REQUIRED)
+  find_package(roscpp_traits REQUIRED)
+
+  catkin_add_gtest(${PROJECT_NAME}-test test/test_kdl_msgs.cpp)
   target_link_libraries(${PROJECT_NAME}-test
     ${catkin_LIBRARIES}
     ${orocos_kdl_LIBRARIES}
+    ${roscpp_serialization_LIBRARIES}
+    ${roscpp_traits_LIBRARIES}
   )
 endif()
 

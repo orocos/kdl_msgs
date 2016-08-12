@@ -6,8 +6,11 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <kdl/frames.hpp>
+
 #include <kdl_msgs/Vector.h>
 #include <kdl_msgs/Rotation.h>
+#include <kdl_msgs/util/forward_traits.h>
 
 namespace kdl_msgs
 {
@@ -78,16 +81,6 @@ struct IsFixedSize< ::KDL::Frame const>
   : TrueType
   { };
 
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : IsFixedSize< ::KDL::Frame >
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::kdl_msgs::Frame_<ContainerAllocator> const>
-  : IsFixedSize< ::KDL::Frame const>
-  { };
-
 template <>
 struct IsMessage< ::KDL::Frame >
   : TrueType
@@ -98,16 +91,6 @@ struct IsMessage< ::KDL::Frame const>
   : TrueType
   { };
 
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : IsMessage< ::KDL::Frame >
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::kdl_msgs::Frame_<ContainerAllocator> const>
-  : IsMessage< ::KDL::Frame const>
-  { };
-
 template <>
 struct HasHeader< ::KDL::Frame >
   : FalseType
@@ -116,16 +99,6 @@ struct HasHeader< ::KDL::Frame >
 template <>
 struct HasHeader< ::KDL::Frame const>
   : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : HasHeader< ::KDL::Frame >
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::kdl_msgs::Frame_<ContainerAllocator> const>
-  : HasHeader< ::KDL::Frame const>
   { };
 
 
@@ -142,11 +115,6 @@ struct MD5Sum< ::KDL::Frame >
   static const uint64_t static_value2 = 0x3b54001d19dc815dULL;
 };
 
-template<class ContainerAllocator>
-struct MD5Sum< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : MD5Sum< ::KDL::Frame >
-{};
-
 template<>
 struct DataType< ::KDL::Frame >
 {
@@ -157,11 +125,6 @@ struct DataType< ::KDL::Frame >
 
   static const char* value(const ::KDL::Frame&) { return value(); }
 };
-
-template<class ContainerAllocator>
-struct DataType< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : DataType< ::KDL::Frame >
-{};
 
 template<>
 struct Definition< ::KDL::Frame >
@@ -175,7 +138,7 @@ Rotation M\n\
 \n\
 ================================================================================\n\
 MSG: kdl_msgs/Vector\n\
-# Represents a KDL::Vector.\n\
+# Represents a KDL::Vector instance.\n\
 # This message is compatible to geometry_msgs/Vector3.\n\
 \n\
 float64 x\n\
@@ -184,7 +147,7 @@ float64 z\n\
 \n\
 ================================================================================\n\
 MSG: kdl_msgs/Rotation\n\
-# Represents a KDL::Rotation.\n\
+# Represents a KDL::Rotation instance.\n\
 \n\
 float64[9] data\n\
 ";
@@ -192,11 +155,6 @@ float64[9] data\n\
 
   static const char* value(const ::KDL::Frame&) { return value(); }
 };
-
-template<class ContainerAllocator>
-struct Definition< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : Definition< ::KDL::Frame >
-{};
 
 } // namespace message_traits
 } // namespace ros
@@ -216,10 +174,6 @@ namespace serialization
 
     ROS_DECLARE_ALLINONE_SERIALIZER
   }; // struct Frame_
-
-  template<class ContainerAllocator> struct Serializer< ::kdl_msgs::Frame_<ContainerAllocator> >
-    : Serializer< ::KDL::Frame >
-  {};
 
 } // namespace serialization
 } // namespace ros
@@ -243,12 +197,11 @@ struct Printer< ::KDL::Frame >
   }
 };
 
-template<class ContainerAllocator>
-struct Printer< ::kdl_msgs::Frame_<ContainerAllocator> >
-  : Printer< ::KDL::Frame >
-{};
-
 } // namespace message_operations
 } // namespace ros
+
+FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Frame_<ContainerAllocator>, ::KDL::Frame)
+FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Frame_<ContainerAllocator>, ::KDL::Frame)
+FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Frame_<ContainerAllocator>, ::KDL::Frame)
 
 #endif // KDL_MSGS_MESSAGE_FRAME_H
