@@ -1,15 +1,15 @@
-#include <kdl_msgs/Chain.h>
+//#include <kdl_msgs/Chain.h>
 #include <kdl_msgs/Frame.h>
 #include <kdl_msgs/FrameStamped.h>
-#include <kdl_msgs/Jacobian.h>
+//#include <kdl_msgs/Jacobian.h>
 #include <kdl_msgs/JntArray.h>
 #include <kdl_msgs/JntArrayStamped.h>
-#include <kdl_msgs/Joint.h>
-#include <kdl_msgs/RigidBodyInertia.h>
+//#include <kdl_msgs/Joint.h>
+//#include <kdl_msgs/RigidBodyInertia.h>
 #include <kdl_msgs/Rotation.h>
 #include <kdl_msgs/RotationStamped.h>
-#include <kdl_msgs/RotationalInertia.h>
-#include <kdl_msgs/Segment.h>
+//#include <kdl_msgs/RotationalInertia.h>
+//#include <kdl_msgs/Segment.h>
 #include <kdl_msgs/Twist.h>
 #include <kdl_msgs/TwistStamped.h>
 #include <kdl_msgs/Vector.h>
@@ -159,35 +159,35 @@ TEST(TestKdlMsgs, Wrench)
   // operators
 }
 
-namespace KDL {
-  static bool operator==(const ::KDL::Chain& lhs, const ::KDL::Chain& rhs)
-  {
-    return // (lhs.getNrOfJoints() == rhs.getNrOfJoints()) &&
-           // (lhs.getNrOfSegments() == rhs.getNrOfSegments()) &&
-           (lhs.segments.size() == rhs.segments.size()) &&
-           std::equal(lhs.segments.begin(), lhs.segments.end(), rhs.segments.begin());
-  }
+//namespace KDL {
+//  static bool operator==(const ::KDL::Chain& lhs, const ::KDL::Chain& rhs)
+//  {
+//    return // (lhs.getNrOfJoints() == rhs.getNrOfJoints()) &&
+//           // (lhs.getNrOfSegments() == rhs.getNrOfSegments()) &&
+//           (lhs.segments.size() == rhs.segments.size()) &&
+//           std::equal(lhs.segments.begin(), lhs.segments.end(), rhs.segments.begin());
+//  }
 
-  std::ostream& operator<<(std::ostream& os, const ::KDL::Chain& value)
-  {
-    ros::message_operations::Printer< ::KDL::Chain >::stream(os, "", value);
-    return os;
-  }
-}
+//  std::ostream& operator<<(std::ostream& os, const ::KDL::Chain& value)
+//  {
+//    ros::message_operations::Printer< ::KDL::Chain >::stream(os, "", value);
+//    return os;
+//  }
+//}
 
-TEST(TestKdlMsgs, Chain)
-{
-  KDL::Chain sample;
-  sample.addSegment(KDL::Segment());
-  kdl_msgs::Chain msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, Chain)
+//{
+//  KDL::Chain sample;
+//  sample.addSegment(KDL::Segment());
+//  kdl_msgs::Chain msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(Chain, KDL::Chain, "0ff773f05fc4dbf531922f1a3d7bdaec", false);
+//  TEST_MESSAGE(Chain, KDL::Chain, "0ff773f05fc4dbf531922f1a3d7bdaec", false);
 
-  // non-default constructors
+//  // non-default constructors
 
-  // operators
-}
+//  // operators
+//}
 
 TEST(TestKdlMsgs, JntArray)
 {
@@ -203,151 +203,151 @@ TEST(TestKdlMsgs, JntArray)
   // operators
 }
 
-TEST(TestKdlMsgs, Jacobian)
-{
-  KDL::Jacobian sample(3);
-  kdl_msgs::Jacobian msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, Jacobian)
+//{
+//  KDL::Jacobian sample(3);
+//  kdl_msgs::Jacobian msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(Jacobian, KDL::Jacobian, "788898178a3da2c3718461eecda8f714", false);
+//  TEST_MESSAGE(Jacobian, KDL::Jacobian, "788898178a3da2c3718461eecda8f714", false);
 
-  // non-default constructors
-  kdl_msgs::Jacobian c2(3);
+//  // non-default constructors
+//  kdl_msgs::Jacobian c2(3);
 
-  // operators
-}
+//  // operators
+//}
 
-namespace KDL {
-  static bool operator==(const ::KDL::Joint& lhs, const ::KDL::Joint& rhs)
-  {
-    return (lhs.getName() == rhs.getName()) &&
-           (lhs.getType() == rhs.getType()) &&
-//           (lhs.scale == rhs.scale) &&
-//           (lhs.offset == rhs.offset) &&
-//           (lhs.inertia == rhs.inertia) &&
-//           (lhs.damping == rhs.damping) &&
-//           (lhs.stiffness == rhs.stiffness) &&
-           (lhs.JointOrigin() == rhs.JointOrigin()) &&
-           (lhs.JointAxis() == rhs.JointAxis());
-  }
+//namespace KDL {
+//  static bool operator==(const ::KDL::Joint& lhs, const ::KDL::Joint& rhs)
+//  {
+//    return (lhs.getName() == rhs.getName()) &&
+//           (lhs.getType() == rhs.getType()) &&
+////           (lhs.scale == rhs.scale) &&
+////           (lhs.offset == rhs.offset) &&
+////           (lhs.inertia == rhs.inertia) &&
+////           (lhs.damping == rhs.damping) &&
+////           (lhs.stiffness == rhs.stiffness) &&
+//           (lhs.JointOrigin() == rhs.JointOrigin()) &&
+//           (lhs.JointAxis() == rhs.JointAxis());
+//  }
 
-  std::ostream& operator<<(std::ostream& os, const ::KDL::Joint& value)
-  {
-    ros::message_operations::Printer< ::KDL::Joint >::stream(os, "", value);
-    return os;
-  }
-}
+//  std::ostream& operator<<(std::ostream& os, const ::KDL::Joint& value)
+//  {
+//    ros::message_operations::Printer< ::KDL::Joint >::stream(os, "", value);
+//    return os;
+//  }
+//}
 
-TEST(TestKdlMsgs, Joint)
-{
-  KDL::Joint sample("foo", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
-                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0);
-  kdl_msgs::Joint msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, Joint)
+//{
+//  KDL::Joint sample("foo", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
+//                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0);
+//  kdl_msgs::Joint msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(Joint, KDL::Joint, "4f8448d28309edc7c24ce443bb15110a", false);
+//  TEST_MESSAGE(Joint, KDL::Joint, "4f8448d28309edc7c24ce443bb15110a", false);
 
-  // non-default constructors
-  kdl_msgs::Joint c2(KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
-                     KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0);
-  kdl_msgs::Joint c3("bar", KDL::Joint::RotX, 6.0, 7.0, 8.0, 9.0, 10.0);
-  kdl_msgs::Joint c4(KDL::Joint::RotX, 6.0, 7.0, 8.0, 9.0, 10.0);
+//  // non-default constructors
+//  kdl_msgs::Joint c2(KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
+//                     KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0);
+//  kdl_msgs::Joint c3("bar", KDL::Joint::RotX, 6.0, 7.0, 8.0, 9.0, 10.0);
+//  kdl_msgs::Joint c4(KDL::Joint::RotX, 6.0, 7.0, 8.0, 9.0, 10.0);
 
-  // operators
-}
+//  // operators
+//}
 
-namespace KDL {
-  static bool operator==(const ::KDL::RotationalInertia& lhs, const ::KDL::RotationalInertia& rhs)
-  {
-    return std::equal(lhs.data, lhs.data + 9, rhs.data);
-  }
+//namespace KDL {
+//  static bool operator==(const ::KDL::RotationalInertia& lhs, const ::KDL::RotationalInertia& rhs)
+//  {
+//    return std::equal(lhs.data, lhs.data + 9, rhs.data);
+//  }
 
-  static bool operator==(const ::KDL::RigidBodyInertia& lhs, const ::KDL::RigidBodyInertia& rhs)
-  {
-    return (lhs.getMass() == rhs.getMass()) &&
-           (lhs.getCOG() == rhs.getCOG()) &&
-           (lhs.getRotationalInertia() == rhs.getRotationalInertia());
-  }
+//  static bool operator==(const ::KDL::RigidBodyInertia& lhs, const ::KDL::RigidBodyInertia& rhs)
+//  {
+//    return (lhs.getMass() == rhs.getMass()) &&
+//           (lhs.getCOG() == rhs.getCOG()) &&
+//           (lhs.getRotationalInertia() == rhs.getRotationalInertia());
+//  }
 
-  std::ostream& operator<<(std::ostream& os, const ::KDL::RotationalInertia& value)
-  {
-    ros::message_operations::Printer< ::KDL::RotationalInertia >::stream(os, "", value);
-    return os;
-  }
+//  std::ostream& operator<<(std::ostream& os, const ::KDL::RotationalInertia& value)
+//  {
+//    ros::message_operations::Printer< ::KDL::RotationalInertia >::stream(os, "", value);
+//    return os;
+//  }
 
-  std::ostream& operator<<(std::ostream& os, const ::KDL::RigidBodyInertia& value)
-  {
-    ros::message_operations::Printer< ::KDL::RigidBodyInertia >::stream(os, "", value);
-    return os;
-  }
-}
+//  std::ostream& operator<<(std::ostream& os, const ::KDL::RigidBodyInertia& value)
+//  {
+//    ros::message_operations::Printer< ::KDL::RigidBodyInertia >::stream(os, "", value);
+//    return os;
+//  }
+//}
 
-TEST(TestKdlMsgs, RigidBodyInertia)
-{
-  KDL::RigidBodyInertia sample(6);
-  kdl_msgs::RigidBodyInertia msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, RigidBodyInertia)
+//{
+//  KDL::RigidBodyInertia sample(6);
+//  kdl_msgs::RigidBodyInertia msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(RigidBodyInertia, KDL::RigidBodyInertia, "33096aa337b8b33a05f701d90acdd33b", true);
+//  TEST_MESSAGE(RigidBodyInertia, KDL::RigidBodyInertia, "33096aa337b8b33a05f701d90acdd33b", true);
 
-  // non-default constructors
-  kdl_msgs::RigidBodyInertia c2(6);
+//  // non-default constructors
+//  kdl_msgs::RigidBodyInertia c2(6);
 
-  // operators
-}
+//  // operators
+//}
 
-TEST(TestKdlMsgs, RotationalInertia)
-{
-  KDL::RotationalInertia sample(6);
-  kdl_msgs::RotationalInertia msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, RotationalInertia)
+//{
+//  KDL::RotationalInertia sample(6);
+//  kdl_msgs::RotationalInertia msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(RotationalInertia, KDL::RotationalInertia, "ca66b32e4ad9de837a30ea9fe5ade752", true);
+//  TEST_MESSAGE(RotationalInertia, KDL::RotationalInertia, "ca66b32e4ad9de837a30ea9fe5ade752", true);
 
-  // non-default constructors
-  kdl_msgs::RotationalInertia c2(6);
+//  // non-default constructors
+//  kdl_msgs::RotationalInertia c2(6);
 
-  // operators
-}
+//  // operators
+//}
 
-namespace KDL {
-  static bool operator==(const ::KDL::Segment& lhs, const ::KDL::Segment& rhs)
-  {
-    return (lhs.getName() == rhs.getName()) &&
-           (lhs.getJoint() == rhs.getJoint()) &&
-           (lhs.getFrameToTip() == rhs.getFrameToTip()) &&
-           (lhs.getInertia() == rhs.getInertia());
-  }
+//namespace KDL {
+//  static bool operator==(const ::KDL::Segment& lhs, const ::KDL::Segment& rhs)
+//  {
+//    return (lhs.getName() == rhs.getName()) &&
+//           (lhs.getJoint() == rhs.getJoint()) &&
+//           (lhs.getFrameToTip() == rhs.getFrameToTip()) &&
+//           (lhs.getInertia() == rhs.getInertia());
+//  }
 
-  std::ostream& operator<<(std::ostream& os, const ::KDL::Segment& value)
-  {
-    ros::message_operations::Printer< ::KDL::Segment >::stream(os, "", value);
-    return os;
-  }
-}
+//  std::ostream& operator<<(std::ostream& os, const ::KDL::Segment& value)
+//  {
+//    ros::message_operations::Printer< ::KDL::Segment >::stream(os, "", value);
+//    return os;
+//  }
+//}
 
-TEST(TestKdlMsgs, Segment)
-{
-  KDL::Segment sample("foo",
-                      ::KDL::Joint("foo", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
-                                   KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
-                      ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
-  kdl_msgs::Segment msg(sample);
-  EXPECT_EQ(sample, msg);
+//TEST(TestKdlMsgs, Segment)
+//{
+//  KDL::Segment sample("foo",
+//                      ::KDL::Joint("foo", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
+//                                   KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
+//                      ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
+//  kdl_msgs::Segment msg(sample);
+//  EXPECT_EQ(sample, msg);
 
-  TEST_MESSAGE(Segment, KDL::Segment, "ea2f787ad0b4c61e6da4d0592adf35fd", false);
+//  TEST_MESSAGE(Segment, KDL::Segment, "ea2f787ad0b4c61e6da4d0592adf35fd", false);
 
-  // non-default constructors
-  kdl_msgs::Segment c2("bar",
-                       ::KDL::Joint("bar", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
-                                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
-                       ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
-  kdl_msgs::Segment c3(::KDL::Joint(KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
-                                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
-                       ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
+//  // non-default constructors
+//  kdl_msgs::Segment c2("bar",
+//                       ::KDL::Joint("bar", KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
+//                                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
+//                       ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
+//  kdl_msgs::Segment c3(::KDL::Joint(KDL::Vector(0.0, 1.0, 2.0), KDL::Vector(3.0, 4.0, 5.0),
+//                                    KDL::Joint::RotAxis, 6.0, 7.0, 8.0, 9.0, 10.0),
+//                       ::KDL::Frame::Identity(), ::KDL::RigidBodyInertia::Zero());
 
-  // operators
-}
+//  // operators
+//}
 
 // Run all the tests that were declared with TEST()
 int main(int argc, char **argv){
