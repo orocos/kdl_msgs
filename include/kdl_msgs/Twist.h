@@ -33,7 +33,12 @@ struct Twist_ : public ::KDL::Twist
   {}
 
   // assignment operator
-  Twist_& operator=(const ::KDL::Twist& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Twist&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Twist& rhs)
   {
     static_cast< ::KDL::Twist&>(*this) = rhs;
     return *this;

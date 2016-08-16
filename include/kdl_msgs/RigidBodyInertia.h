@@ -32,7 +32,12 @@ struct RigidBodyInertia_ : public ::KDL::RigidBodyInertia
   {}
 
   // assignment operator
-  RigidBodyInertia_& operator=(const ::KDL::RigidBodyInertia& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::RigidBodyInertia&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::RigidBodyInertia& rhs)
   {
     static_cast< ::KDL::RigidBodyInertia&>(*this) = rhs;
     return *this;

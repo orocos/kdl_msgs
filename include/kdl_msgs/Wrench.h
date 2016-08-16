@@ -29,7 +29,12 @@ struct Wrench_ : public ::KDL::Wrench
   {}
 
   // assignment operator
-  Wrench_& operator=(const ::KDL::Wrench& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Wrench&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Wrench& rhs)
   {
     static_cast< ::KDL::Wrench&>(*this) = rhs;
     return *this;

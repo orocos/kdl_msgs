@@ -31,7 +31,12 @@ struct Jacobian_ : public ::KDL::Jacobian
   {}
 
   // assignment operator
-  Jacobian_& operator=(const ::KDL::Jacobian& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Jacobian&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Jacobian& rhs)
   {
     static_cast< ::KDL::Jacobian&>(*this) = rhs;
     return *this;

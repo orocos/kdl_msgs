@@ -27,7 +27,12 @@ struct Chain_ : public ::KDL::Chain
   {}
 
   // assignment operator
-  Chain_& operator=(const ::KDL::Chain& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Chain&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Chain& rhs)
   {
     static_cast< ::KDL::Chain&>(*this) = rhs;
     return *this;

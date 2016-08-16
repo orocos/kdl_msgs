@@ -34,7 +34,12 @@ struct Vector_ : public ::KDL::Vector
   {}
 
   // assignment operator
-  Vector_& operator=(const ::KDL::Vector& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Vector&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Vector& rhs)
   {
     static_cast< ::KDL::Vector&>(*this) = rhs;
     return *this;

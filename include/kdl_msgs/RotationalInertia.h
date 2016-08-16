@@ -37,7 +37,12 @@ struct RotationalInertia_ : public ::KDL::RotationalInertia
   {}
 
   // assignment operator
-  RotationalInertia_& operator=(const ::KDL::RotationalInertia& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::RotationalInertia&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::RotationalInertia& rhs)
   {
     static_cast< ::KDL::RotationalInertia&>(*this) = rhs;
     return *this;

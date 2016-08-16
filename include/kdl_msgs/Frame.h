@@ -37,7 +37,12 @@ struct Frame_ : public ::KDL::Frame
   {}
 
   // assignment operator
-  Frame_& operator=(const ::KDL::Frame& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Frame&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Frame& rhs)
   {
     static_cast< ::KDL::Frame&>(*this) = rhs;
     return *this;

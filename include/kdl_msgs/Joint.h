@@ -43,7 +43,12 @@ struct Joint_ : public ::KDL::Joint
   {}
 
   // assignment operator
-  Joint_& operator=(const ::KDL::Joint& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Joint&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Joint& rhs)
   {
     static_cast< ::KDL::Joint&>(*this) = rhs;
     return *this;

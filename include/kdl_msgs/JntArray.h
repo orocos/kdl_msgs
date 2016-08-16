@@ -35,7 +35,12 @@ struct JntArray_ : public ::KDL::JntArray
   {}
 
   // assignment operator
-  JntArray_& operator=(const ::KDL::JntArray& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::JntArray&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::JntArray& rhs)
   {
     static_cast< ::KDL::JntArray&>(*this) = rhs;
     return *this;

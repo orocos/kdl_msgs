@@ -39,7 +39,12 @@ struct Segment_ : public ::KDL::Segment
   {}
 
   // assignment operator
-  Segment_& operator=(const ::KDL::Segment& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Segment&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Segment& rhs)
   {
     static_cast< ::KDL::Segment&>(*this) = rhs;
     return *this;

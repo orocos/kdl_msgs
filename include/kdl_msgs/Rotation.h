@@ -41,7 +41,12 @@ struct Rotation_ : public ::KDL::Rotation
   {}
 
   // assignment operator
-  Rotation_& operator=(const ::KDL::Rotation& rhs)
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Rotation&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Rotation& rhs)
   {
     static_cast< ::KDL::Rotation&>(*this) = rhs;
     return *this;
