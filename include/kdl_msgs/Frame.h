@@ -14,8 +14,53 @@
 
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
 // using C++11 syntax ::KDL::Frame and kdl_msgs::Frame_ are exactly the same type
 template <typename ContainerAllocator> using Frame_ = ::KDL::Frame;
+
+#else
+template <class ContainerAllocator>
+struct Frame_ : public ::KDL::Frame
+{
+  typedef Frame_<ContainerAllocator> Type;
+
+  Frame_()
+  {}
+  Frame_(const ContainerAllocator&)
+  {}
+  Frame_(const ::KDL::Rotation& R)
+    : ::KDL::Frame(R)
+  {}
+  Frame_(const ::KDL::Vector& V)
+    : ::KDL::Frame(V)
+  {}
+  Frame_(const ::KDL::Rotation& R, const ::KDL::Vector& V)
+    : ::KDL::Frame(R, V)
+  {}
+  Frame_(const ::KDL::Frame& other)
+    : ::KDL::Frame(other)
+  {}
+
+  // assignment operator
+  Type& operator=(const Type& rhs)
+  {
+    static_cast< ::KDL::Frame&>(*this) = rhs;
+    return *this;
+  }
+  Type& operator=(const ::KDL::Frame& rhs)
+  {
+    static_cast< ::KDL::Frame&>(*this) = rhs;
+    return *this;
+  }
+
+  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _p_type;
+  typedef  ::kdl_msgs::Rotation_<ContainerAllocator>  _M_type;
+
+  typedef boost::shared_ptr< ::kdl_msgs::Frame_<ContainerAllocator> > Ptr;
+  typedef boost::shared_ptr< ::kdl_msgs::Frame_<ContainerAllocator> const> ConstPtr;
+
+}; // struct Frame_
+#endif
 
 typedef ::kdl_msgs::Frame_<std::allocator<void> > Frame;
 
