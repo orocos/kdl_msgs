@@ -13,6 +13,10 @@
 
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Vector and kdl_msgs::Vector_ are exactly the same type
+template <typename ContainerAllocator> using Vector_ = ::KDL::Vector;
+#else
 template <class ContainerAllocator>
 struct Vector_ : public ::KDL::Vector
 {
@@ -54,19 +58,21 @@ struct Vector_ : public ::KDL::Vector
   typedef boost::shared_ptr< ::kdl_msgs::Vector_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Vector_
+#endif
 
 typedef ::kdl_msgs::Vector_<std::allocator<void> > Vector;
 
 typedef boost::shared_ptr< ::kdl_msgs::Vector > VectorPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Vector const> VectorConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Vector_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Vector_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -199,8 +205,10 @@ struct Printer< ::KDL::Vector >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Vector_<ContainerAllocator>, ::KDL::Vector)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_VECTOR_H

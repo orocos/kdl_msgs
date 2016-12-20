@@ -13,6 +13,10 @@
 
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::JntArray and kdl_msgs::JntArray_ are exactly the same type
+template <typename ContainerAllocator> using JntArray_ = ::KDL::JntArray;
+#else
 template <class ContainerAllocator>
 struct JntArray_ : public ::KDL::JntArray
 {
@@ -52,19 +56,21 @@ struct JntArray_ : public ::KDL::JntArray
   typedef boost::shared_ptr< ::kdl_msgs::JntArray_<ContainerAllocator> const> ConstPtr;
 
 }; // struct JntArray_
+#endif
 
 typedef ::kdl_msgs::JntArray_<std::allocator<void> > JntArray;
 
 typedef boost::shared_ptr< ::kdl_msgs::JntArray > JntArrayPtr;
 typedef boost::shared_ptr< ::kdl_msgs::JntArray const> JntArrayConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::JntArray_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::JntArray_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -198,8 +204,10 @@ struct Printer< ::KDL::JntArray >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::JntArray_<ContainerAllocator>, ::KDL::JntArray)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::JntArray_<ContainerAllocator>, ::KDL::JntArray)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::JntArray_<ContainerAllocator>, ::KDL::JntArray)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_JNTARRAY_H

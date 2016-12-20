@@ -15,6 +15,10 @@
 
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Segment and kdl_msgs::Segment_ are exactly the same type
+template <typename ContainerAllocator> using Segment_ = ::KDL::Segment;
+#else
 template <class ContainerAllocator>
 struct Segment_ : public ::KDL::Segment
 {
@@ -59,19 +63,21 @@ struct Segment_ : public ::KDL::Segment
   typedef boost::shared_ptr< ::kdl_msgs::Segment_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Segment_
+#endif
 
 typedef ::kdl_msgs::Segment_<std::allocator<void> > Segment;
 
 typedef boost::shared_ptr< ::kdl_msgs::Segment > SegmentPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Segment const> SegmentConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Segment_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Segment_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -300,8 +306,10 @@ struct Printer< ::KDL::Segment >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Segment_<ContainerAllocator>, ::KDL::Segment)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Segment_<ContainerAllocator>, ::KDL::Segment)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Segment_<ContainerAllocator>, ::KDL::Segment)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_SEGMENT_H

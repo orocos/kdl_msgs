@@ -12,6 +12,10 @@
 
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Twist and kdl_msgs::Twist_ are exactly the same type
+template <typename ContainerAllocator> using Twist_ = ::KDL::Twist;
+#else
 template <class ContainerAllocator>
 struct Twist_ : public ::KDL::Twist
 {
@@ -53,19 +57,21 @@ struct Twist_ : public ::KDL::Twist
   typedef boost::shared_ptr< ::kdl_msgs::Twist_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Twist_
+#endif
 
 typedef ::kdl_msgs::Twist_<std::allocator<void> > Twist;
 
 typedef boost::shared_ptr< ::kdl_msgs::Twist > TwistPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Twist const> TwistConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Twist_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Twist_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -198,8 +204,10 @@ struct Printer< ::KDL::Twist >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Twist_<ContainerAllocator>, ::KDL::Twist)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Twist_<ContainerAllocator>, ::KDL::Twist)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Twist_<ContainerAllocator>, ::KDL::Twist)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_TWIST_H
