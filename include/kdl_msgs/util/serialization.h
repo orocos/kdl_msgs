@@ -314,9 +314,9 @@ struct CVectorSerializer<T, typename boost::enable_if<mpl::and_<mt::IsFixedSize<
   template<typename Stream>
   inline static void write(Stream& stream, const T* v, const std::size_t size)
   {
-    stream.next((uint32_t)v.size());
-    ConstIteratorType it = v.begin();
-    ConstIteratorType end = v.end();
+    stream.next((uint32_t)size);
+    ConstIteratorType it = v;
+    ConstIteratorType end = v + size;
     for (; it != end; ++it)
     {
       stream.next(*it);
@@ -336,8 +336,8 @@ struct CVectorSerializer<T, typename boost::enable_if<mpl::and_<mt::IsFixedSize<
       }
     }
 
-    IteratorType it = v.begin();
-    IteratorType end = v.end();
+    IteratorType it = v;
+    IteratorType end = v + len;
     for (; it != end; ++it)
     {
       stream.next(*it);
