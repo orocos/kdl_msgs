@@ -11,8 +11,14 @@
 #include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::RotationalInertia and kdl_msgs::RotationalInertia_ are exactly the same type
+template <typename ContainerAllocator> using RotationalInertia_ = ::KDL::RotationalInertia;
+#else
 template <class ContainerAllocator>
 struct RotationalInertia_ : public ::KDL::RotationalInertia
 {
@@ -54,19 +60,21 @@ struct RotationalInertia_ : public ::KDL::RotationalInertia
   typedef boost::shared_ptr< ::kdl_msgs::RotationalInertia_<ContainerAllocator> const> ConstPtr;
 
 }; // struct RotationalInertia_
+#endif
 
 typedef ::kdl_msgs::RotationalInertia_<std::allocator<void> > RotationalInertia;
 
 typedef boost::shared_ptr< ::kdl_msgs::RotationalInertia > RotationalInertiaPtr;
 typedef boost::shared_ptr< ::kdl_msgs::RotationalInertia const> RotationalInertiaConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::RotationalInertia_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::RotationalInertia_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -198,8 +206,10 @@ struct Printer< ::KDL::RotationalInertia >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::RotationalInertia_<ContainerAllocator>, ::KDL::RotationalInertia)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::RotationalInertia_<ContainerAllocator>, ::KDL::RotationalInertia)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::RotationalInertia_<ContainerAllocator>, ::KDL::RotationalInertia)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_ROTATIONALINERTIA_H

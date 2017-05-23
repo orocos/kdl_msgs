@@ -11,8 +11,14 @@
 #include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Jacobian and kdl_msgs::Jacobian_ are exactly the same type
+template <typename ContainerAllocator> using Jacobian_ = ::KDL::Jacobian;
+#else
 template <class ContainerAllocator>
 struct Jacobian_ : public ::KDL::Jacobian
 {
@@ -49,19 +55,21 @@ struct Jacobian_ : public ::KDL::Jacobian
   typedef boost::shared_ptr< ::kdl_msgs::Jacobian_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Jacobian_
+#endif
 
 typedef ::kdl_msgs::Jacobian_<std::allocator<void> > Jacobian;
 
 typedef boost::shared_ptr< ::kdl_msgs::Jacobian > JacobianPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Jacobian const> JacobianConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Jacobian_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Jacobian_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -198,8 +206,10 @@ struct Printer< ::KDL::Jacobian >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Jacobian_<ContainerAllocator>, ::KDL::Jacobian)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Jacobian_<ContainerAllocator>, ::KDL::Jacobian)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Jacobian_<ContainerAllocator>, ::KDL::Jacobian)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_JACOBIAN_H

@@ -11,8 +11,14 @@
 #include <kdl_msgs/Segment.h>
 #include <kdl_msgs/util/forward_traits.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Chain and kdl_msgs::Chain_ are exactly the same type
+template <typename ContainerAllocator> using Chain_ = ::KDL::Chain;
+#else
 template <class ContainerAllocator>
 struct Chain_ : public ::KDL::Chain
 {
@@ -45,19 +51,21 @@ struct Chain_ : public ::KDL::Chain
   typedef boost::shared_ptr< ::kdl_msgs::Chain_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Chain_
+#endif
 
 typedef ::kdl_msgs::Chain_<std::allocator<void> > Chain;
 
 typedef boost::shared_ptr< ::kdl_msgs::Chain > ChainPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Chain const> ChainConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Chain_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Chain_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -267,8 +275,10 @@ struct Printer< ::KDL::Chain >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Chain_<ContainerAllocator>, ::KDL::Chain)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Chain_<ContainerAllocator>, ::KDL::Chain)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Chain_<ContainerAllocator>, ::KDL::Chain)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_CHAIN_H

@@ -11,8 +11,14 @@
 #include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Rotation and kdl_msgs::Rotation_ are exactly the same type
+template <typename ContainerAllocator> using Rotation_ = ::KDL::Rotation;
+#else
 template <class ContainerAllocator>
 struct Rotation_ : public ::KDL::Rotation
 {
@@ -58,19 +64,21 @@ struct Rotation_ : public ::KDL::Rotation
   typedef boost::shared_ptr< ::kdl_msgs::Rotation_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Rotation_
+#endif
 
 typedef ::kdl_msgs::Rotation_<std::allocator<void> > Rotation;
 
 typedef boost::shared_ptr< ::kdl_msgs::Rotation > RotationPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Rotation const> RotationConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Rotation_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Rotation_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -202,8 +210,10 @@ struct Printer< ::KDL::Rotation >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Rotation_<ContainerAllocator>, ::KDL::Rotation)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_ROTATION_H

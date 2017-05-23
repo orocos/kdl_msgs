@@ -10,8 +10,14 @@
 
 #include <kdl_msgs/util/forward_traits.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+// using C++11 syntax ::KDL::Wrench and kdl_msgs::Wrench_ are exactly the same type
+template <typename ContainerAllocator> using Wrench_ = ::KDL::Wrench;
+#else
 template <class ContainerAllocator>
 struct Wrench_ : public ::KDL::Wrench
 {
@@ -47,19 +53,21 @@ struct Wrench_ : public ::KDL::Wrench
   typedef boost::shared_ptr< ::kdl_msgs::Wrench_<ContainerAllocator> const> ConstPtr;
 
 }; // struct Wrench_
+#endif
 
 typedef ::kdl_msgs::Wrench_<std::allocator<void> > Wrench;
 
 typedef boost::shared_ptr< ::kdl_msgs::Wrench > WrenchPtr;
 typedef boost::shared_ptr< ::kdl_msgs::Wrench const> WrenchConstPtr;
 
-
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 template<typename ContainerAllocator>
 std::ostream& operator<<(std::ostream& s, const ::kdl_msgs::Wrench_<ContainerAllocator> & v)
 {
 ros::message_operations::Printer< ::kdl_msgs::Wrench_<ContainerAllocator> >::stream(s, "", v);
 return s;
 }
+#endif
 
 } // namespace kdl_msgs
 
@@ -192,8 +200,10 @@ struct Printer< ::KDL::Wrench >
 } // namespace message_operations
 } // namespace ros
 
+#ifdef BOOST_NO_CXX11_TEMPLATE_ALIASES
 FORWARD_ROS_MESSAGE_TRAITS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Wrench_<ContainerAllocator>, ::KDL::Wrench)
 FORWARD_ROS_SERIALIZER_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Wrench_<ContainerAllocator>, ::KDL::Wrench)
 FORWARD_ROS_MESSAGE_OPERATIONS_TEMPLATE(class ContainerAllocator, ::kdl_msgs::Wrench_<ContainerAllocator>, ::KDL::Wrench)
+#endif
 
 #endif // KDL_MSGS_MESSAGE_WRENCH_H
