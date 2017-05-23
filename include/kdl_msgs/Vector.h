@@ -11,6 +11,8 @@
 #include <kdl_msgs/util/forward_traits.h>
 #include <kdl_msgs/util/serialization.h>
 
+#include <boost/config.hpp>
+
 namespace kdl_msgs
 {
 #ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
