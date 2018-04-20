@@ -169,9 +169,14 @@ namespace serialization
     template<typename Stream, typename T>
     inline static void read(Stream& stream, T& m)
     {
-      std::size_t size = stream.getLength() / sizeof(Eigen::VectorXd::Scalar);
-      m.resize(size);
-      deserialize(stream, m.data.data(), m.data.rows());
+      uint32_t len;
+      stream.next(len);
+      m.resize(len);
+
+      for (int i = 0 ; i < len ; i++)
+      {
+        stream.next(m(i));
+      }
     }
 
     template<typename T>
