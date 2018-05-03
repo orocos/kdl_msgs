@@ -168,7 +168,9 @@ namespace serialization
     template<typename Stream, typename T>
     inline static void read(Stream& stream, T& m)
     {
-      std::size_t size = stream.getLength() / sizeof(typename T::value_type);
+      IStream peek_size_stream(stream.getData(), stream.getLength());
+      uint32_t size;
+      peek_size_stream.next(size);
       BOOST_ASSERT_MSG((size % 6) == 0, "Size of Jacobian must be a multiple of 6");
       m.resize(size / 6);
       deserialize(stream, m.data.data(), m.data.rows() * m.data.cols());
