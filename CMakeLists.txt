@@ -70,7 +70,8 @@ catkin_package(
 ###########
 
 ## Language: cpp
-if(TARGET ${PROJECT_NAME}_generate_messages_cpp)
+if(gencpp_VERSION VERSION_LESS "0.6.0" AND
+   TARGET ${PROJECT_NAME}_generate_messages_cpp)
   ## Overwrite generated header files in devel-space
   file(GLOB HEADERS
     "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/*.h"
