@@ -70,8 +70,24 @@ catkin_package(
 ###########
 
 ## Language: cpp
+if(gencpp_VERSION VERSION_LESS "0.6.0" AND
+   TARGET ${PROJECT_NAME}_generate_messages_cpp)
+  ## Overwrite generated header files in devel-space
+  file(GLOB HEADERS
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/*.h"
+  )
+  configure_file(cmake/rename_generated_header_files.cmake.in cmake/rename_generated_header_files.cmake @ONLY)
+  add_custom_target(${PROJECT_NAME}_rename_generated_header_files
+    DEPENDS ${HEADERS}
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/rename_generated_header_files.cmake
+    COMMENT "Moving generated C++ header files to include/${PROJECT_NAME}/generated/."
+  )
+  add_dependencies(${PROJECT_NAME}_rename_generated_header_files ${PROJECT_NAME}_generate_messages_cpp)
+  add_dependencies(${PROJECT_NAME}_generate_messages ${PROJECT_NAME}_rename_generated_header_files)
+endif()
 
 ## Language: Python
+# TODO
 
 #############
 ## Install ##
