@@ -7,7 +7,6 @@
 #include <boost/serialization/string.hpp>
 #include <kdl_msgs/Twist.h>
 #include <kdl_msgs/boost/Vector.h>
-#include <kdl_msgs/boost/Vector.h>
 
 namespace boost
 {
@@ -17,8 +16,8 @@ namespace serialization
 template<class Archive, class ContainerAllocator>
 void serialize(Archive& a,  ::kdl_msgs::Twist_<ContainerAllocator>  & m, unsigned int)
 {
-    a & make_nvp("linear", static_cast< ::KDL::Vector& >(m.linear));
-    a & make_nvp("angular", static_cast< ::KDL::Vector& >(m.angular));
+    a & make_nvp("linear", m.vel);
+    a & make_nvp("angular", m.rot);
 }
 
 } // namespace serialization
