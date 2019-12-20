@@ -15,9 +15,9 @@ namespace serialization
 template<class Archive, class ContainerAllocator>
 void serialize(Archive& a,  ::kdl_msgs::Vector_<ContainerAllocator>  & m, unsigned int)
 {
-    a & make_nvp("x", m.x);
-    a & make_nvp("y", m.y);
-    a & make_nvp("z", m.z);
+    a & make_nvp("x", m.data[0]);
+    a & make_nvp("y", m.data[1]);
+    a & make_nvp("z", m.data[2]);
 }
 
 } // namespace serialization
