@@ -24,18 +24,18 @@ catkin_python_setup()
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-#  Chain.msg
+  Chain.msg
   Frame.msg
   FrameStamped.msg
-#  Jacobian.msg
+  Jacobian.msg
   JntArray.msg
   JntArrayStamped.msg
-#  Joint.msg
-#  RigidBodyInertia.msg
+  Joint.msg
+  RigidBodyInertia.msg
   Rotation.msg
   RotationStamped.msg
-#  RotationalInertia.msg
-#  Segment.msg
+  RotationalInertia.msg
+  Segment.msg
   Twist.msg
   TwistStamped.msg
   Vector.msg
@@ -98,15 +98,15 @@ endif()
 
 ## Mark cpp header files for installation
 install(FILES
-#  include/${PROJECT_NAME}/Chain.h
+  include/${PROJECT_NAME}/Chain.h
   include/${PROJECT_NAME}/Frame.h
-#  include/${PROJECT_NAME}/Jacobian.h
+  include/${PROJECT_NAME}/Jacobian.h
   include/${PROJECT_NAME}/JntArray.h
-#  include/${PROJECT_NAME}/Joint.h
-#  include/${PROJECT_NAME}/RigidBodyInertia.h
+  include/${PROJECT_NAME}/Joint.h
+  include/${PROJECT_NAME}/RigidBodyInertia.h
   include/${PROJECT_NAME}/Rotation.h
-#  include/${PROJECT_NAME}/RotationalInertia.h
-#  include/${PROJECT_NAME}/Segment.h
+  include/${PROJECT_NAME}/RotationalInertia.h
+  include/${PROJECT_NAME}/Segment.h
   include/${PROJECT_NAME}/Twist.h
   include/${PROJECT_NAME}/Vector.h
   include/${PROJECT_NAME}/Wrench.h
